@@ -5,7 +5,9 @@
   "main": "index.js",
   "scripts": {
     "start": "ts-node-dev src/app.ts",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "format": "prettier --write \"src/**/*.{ts,js,json}\"",
+    "format:check": "prettier --check \"src/**/*.{ts,js,json}\""
   },
   "keywords": [],
   "author": "",
@@ -22,6 +24,7 @@
     "typescript": "^5.8.3"
   },
   "devDependencies": {
-    "@types/pg": "^8.11.11"
+    "@types/pg": "^8.11.11",
+    "prettier": "^3.5.3"
   }
 }
