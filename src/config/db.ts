@@ -15,6 +15,7 @@ const AppDataSource = new DataSource({
   entities: ["src/entities/*.ts"], // 告訴 TypeORM 去哪找資料表定義
   synchronize: true, // 自動建立資料表（開發時用，正式環境要關掉）
   logging: true, // 顯示 SQL 語法（方便除錯）
+  ssl: { rejectUnauthorized: false },
 });
 
 // 初始化連線

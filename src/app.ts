@@ -18,8 +18,11 @@ AppDataSource.initialize()
     // 啟動 Express 伺服器
     app.use("/", homeRoutes); // 用剛剛的 routes 處理所有路徑
 
-    app.listen(3000, () => {
-      console.log("伺服器跑在 http://localhost:3000");
+    // 部署 Render 這邊要加上 process.env.PORT
+    // 因為 Render 會自動將 PORT 環境變數注入到容器中
+    const PORT = process.env.PORT || 3000;
+    app.listen(PORT, () => {
+      console.log(`Server is running on port ${PORT}`);
     });
   })
   .catch((error) => {
