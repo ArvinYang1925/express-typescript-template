@@ -4,6 +4,8 @@ import * as dotenv from "dotenv"; // 載入 dotenv
 // 載入 .env 檔案
 dotenv.config();
 
+const isProduction = process.env.NODE_ENV === "production";
+
 // 建立 TypeORM 的資料來源（連線設定）
 const AppDataSource = new DataSource({
   type: "postgres", // 資料庫類型是 PostgreSQL
@@ -12,7 +14,10 @@ const AppDataSource = new DataSource({
   username: process.env.DB_USER, // 從 .env 讀使用者名稱
   password: process.env.DB_PASSWORD, // 從 .env 讀密碼
   database: process.env.DB_NAME, // 從 .env 讀資料庫名稱
-  entities: ["src/entities/*.ts"], // 告訴 TypeORM 去哪找資料表定義
+  entities: [
+    // 根據環境載入不同路徑的檔案
+    isProduction ? "dist/entities/*.js" : "src/entities/*.ts",
+  ],
   synchronize: true, // 自動建立資料表（開發時用，正式環境要關掉）
   logging: true, // 顯示 SQL 語法（方便除錯）
   ssl: { rejectUnauthorized: false },
